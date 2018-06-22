@@ -1,0 +1,22 @@
+{
+  "name": "express-component-starter",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^1.30.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "lodash": "^4.17.10",
+    "morgan": "~1.9.0",
+    "validatorjs": "^3.14.2"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  }
+}
