@@ -43,6 +43,9 @@ index.js -> orchestrator
 [plural component name]Repository.js -> repository ( consume model, consumed by controller to get collections - no save / update methods )
 [plural component name]Validator.js -> validate request & response based on validation rules. ( tight couple with validator libraries for rules )
 
+## Component Generator
+
+To make things easier, we've made a simple bash script to generate components for you. Call it like this `sh component-generator ComponentName` - and it will generate a folder with files inside components folder.
 
 ## References
 

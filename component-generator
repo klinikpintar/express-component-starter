@@ -1,0 +1,37 @@
+#!/bin/bash
+
+uppercase=$1
+echo $uppercase
+
+lowercase="`echo "$uppercase" | tr '[:upper:]' '[:lower:]'`"
+echo $lowercase
+
+echo "creating folder"
+cp -R .template components/$lowercase
+
+echo "creating files"
+cd ./components/$lowercase
+
+for D in $(find -d . -name "*(qq)*" -type d ) '.' 
+do 
+    pushd $D >> /dev/null
+    echo 'directory: ' "$D"
+    for file in $(find . -name "*(qq)*" -type f -maxdepth 1)
+    do
+        #change variable inside file
+        sed -i '' 's/(QQ)/'$uppercase'/g' "$file"
+
+        echo '    change' "$file" 'to' `echo "${file//(qq)/$lowercase}"`
+        mv "$file" `echo "${file//(qq)/$lowercase}"`
+    done
+    popd >> /dev/null
+
+    echo 'change' "$D" 'to' `echo "$D"`
+    #change only the last occurence of (qq)
+    mv "$D" `echo "$D"`
+
+    #change variable inside index.js
+    sed -i '' 's/(qq)/'$lowercase'/g' index.js
+done
+ls -al .
+echo "process complete"
