@@ -1,9 +1,5 @@
 //wrapper for ORM / Persistence libraries. all persistence data related should go through here
 class (QQ)Repository {
-    constructor() {
-
-    }
-
     async find(criteria){
 
     }

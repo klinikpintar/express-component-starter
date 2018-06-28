@@ -1,16 +1,14 @@
-//validate response & request
-//also store success / error messages
+// validate response & request
+// also store success / error messages
 
 class UserValidator {
+  async validateRequest (param) {
 
-    async validateRequest(param) {
+  }
 
-    }
+  async validateResponse (param) {
 
-    async validateResponse(param) {
-
-    }
-
+  }
 }
 
 module.exports = UserValidator

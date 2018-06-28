@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // start route handling
-// app.use('/api/auth', authComponent)
+app.use('/api/auth', authComponent)
 app.use('/api/user', userComponent)
 
 // catch 404 and forward to error handler
