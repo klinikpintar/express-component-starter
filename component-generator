@@ -3,7 +3,7 @@
 uppercase=$1
 echo $uppercase
 
-lowercase="`echo "$uppercase" | tr '[:upper:]' '[:lower:]'`"
+lowercase="$(echo ${uppercase:0:1} | tr "[A-Z]" "[a-z]")${uppercase:1}"
 echo $lowercase
 
 echo "creating folder"
