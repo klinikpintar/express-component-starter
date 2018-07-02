@@ -20,6 +20,7 @@ do
     do
         #change variable inside file
         sed -i '' 's/(QQ)/'$uppercase'/g' "$file"
+        sed -i '' 's/(qq)/'$lowercase'/g' "$file"
 
         echo '    change' "$file" 'to' `echo "${file//(qq)/$lowercase}"`
         mv "$file" `echo "${file//(qq)/$lowercase}"`
