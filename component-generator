@@ -7,9 +7,10 @@ kebabcase="$(echo ${uppercase} | sed -e 's/\([A-Z]\)/\-\1/g' -e 's/\-//' | tr '[
 echo $kebabcase
 
 echo "creating folder"
-cp -R .template components/$kebabcase
+cp -R .template/api components/$kebabcase
+cp -R .template/test tests/api/$kebabcase
 
-echo "creating files"
+echo "modifying files for api"
 cd ./components/$kebabcase
 
 for D in $(find -d . -name "*(qq)*" -type d ) '.' 
@@ -32,4 +33,9 @@ do
     mv "$D" `echo "$D"`
 done
 ls -al .
+
+echo "modifying files for test"
+cd ../../tests/api/$kebabcase
+sed -i '' 's/(qq)/'$kebabcase'/g' "index.js"
+
 echo "process complete"

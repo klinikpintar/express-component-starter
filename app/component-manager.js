@@ -4,7 +4,7 @@ const path = require('path')
 class ComponentManager {
   constructor (express) {
     this.express = express
-    this.path = path.join(__dirname, '../components')
+    this.path = path.join(process.env.PWD, 'components')
 
     this.disabledComponents = []
   }

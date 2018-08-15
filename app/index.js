@@ -2,13 +2,13 @@ require('newrelic')
 const http = require('http')
 const https = require('https')
 const express = require('express')
-const Config = require('app/config')
+const ConfigManager = require('app/config-manager')
 const DatabaseManager = require('app/database-manager')
 const ComponentManager = require('app/component-manager')
 
 class Application {
   constructor () {
-    let config = new Config()
+    let config = new ConfigManager()
     this.express = express()
     this.config = config.get('server')
     this.serviceProviders = config.get('service-provider')

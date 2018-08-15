@@ -4,7 +4,7 @@ var _ = require('lodash')
 
 class Config {
   constructor () {
-    this.path = path.join(__dirname, '/config')
+    this.path = path.join(__dirname, 'config')
     this.config = {}
     this.fetchConfig()
   }

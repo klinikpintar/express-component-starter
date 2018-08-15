@@ -1,4 +1,4 @@
-var Config = require('app/config')
+var Config = require('app/config-manager')
 
 class Database {
   constructor () {
