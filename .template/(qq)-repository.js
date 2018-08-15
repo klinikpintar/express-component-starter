@@ -1,12 +1,13 @@
 //wrapper for ORM / Persistence libraries. all persistence data related should go through here
+
 class (QQ)Repository {
     async find(criteria){
 
     }
-    async add(object) {
-
+    async create(object) {
+        return object
     }
-    async remove(criteria) {
+    async delete(criteria) {
 
     }
 

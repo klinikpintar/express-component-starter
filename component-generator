@@ -3,14 +3,14 @@
 uppercase=$1
 echo $uppercase
 
-lowercase="$(echo ${uppercase:0:1} | tr "[A-Z]" "[a-z]")${uppercase:1}"
-echo $lowercase
+kebabcase="$(echo ${uppercase} | sed -e 's/\([A-Z]\)/\-\1/g' -e 's/\-//' | tr '[:upper:]' '[:lower:]')"
+echo $kebabcase
 
 echo "creating folder"
-cp -R .template components/$lowercase
+cp -R .template components/$kebabcase
 
 echo "creating files"
-cd ./components/$lowercase
+cd ./components/$kebabcase
 
 for D in $(find -d . -name "*(qq)*" -type d ) '.' 
 do 
@@ -20,19 +20,16 @@ do
     do
         #change variable inside file
         sed -i '' 's/(QQ)/'$uppercase'/g' "$file"
-        sed -i '' 's/(qq)/'$lowercase'/g' "$file"
+        sed -i '' 's/(qq)/'$kebabcase'/g' "$file"
 
-        echo '    change' "$file" 'to' `echo "${file//(qq)/$lowercase}"`
-        mv "$file" `echo "${file//(qq)/$lowercase}"`
+        echo '    change' "$file" 'to' `echo "${file//(qq)/$kebabcase}"`
+        mv "$file" `echo "${file//(qq)/$kebabcase}"`
     done
     popd >> /dev/null
 
     echo 'change' "$D" 'to' `echo "$D"`
     #change only the last occurence of (qq)
     mv "$D" `echo "$D"`
-
-    #change variable inside index.js
-    sed -i '' 's/(qq)/'$lowercase'/g' index.js
 done
 ls -al .
 echo "process complete"
