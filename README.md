@@ -3,7 +3,7 @@ an express starter project with component based grouping.
 
 **Goals** : 
 
-Creating a scalable architecture that can be translated into micro-services easily
+Creating a scalable architecture that can be translated into micro-services easily ( with the help of `component-generator` runnable script )
 
 ---
 
@@ -38,13 +38,21 @@ Please run `standard --fix` before committing. Or use IDE plugin to auto format 
 - `app/config` : containing configuration files to run your app. Including but not limited to : database configuration, server configuration, provider used
 - `app/providers` : containing specific module configuration that your backend framework will use (in this case, ExpressJS). Please note that you need to update `app/config/service-provider.js` after adding file inside this folder.
 - `app/*.js` : manager for configurations and server files.
-- `components` : 
+- `components` : the most important part. it contains several layer for you to create your API
+    - **Model** : represented by `module-name.js` - feel free to add more model if necessary
+    - **Repository** : represented by `module-name-repository.js` - it contains data processing functions for your model & database
+    - **Controller** : represented by `module-name-controller.js` - it contains business logic for your components / application
+    - **Transformer** : represented by `module-name-transformer.js` - it transform data from API and making sure the schema is always valid & consistent
+    - **Validator** : represented by `module-name-validator.js` - it validates requests & responses and making sure all data input & output will conform to client's requirement
+    - **Router** : represented by `module-name-api.js` - it contains your route list and logics.
 - `libraries` : containing module configuration that your components will use ( e.g for communicating with each other )
-- `tests` : your test files. we use `supertest`
+- `tests` : your test files. we use `supertest` as the testing library.
 
 ## Component Generator
 
-To make things easier, we've made a simple bash script to generate components for you. Call it like this `sh component-generator ComponentName` - and it will generate a folder with files inside `components` folder. Please use `UpperCamelCase`
+To make things easier, we've made a simple bash script to generate components for you. Call it like this `sh component-generator ComponentName` - and it will generate a folder with files inside `components` folder - it will also generate a folder with test suite template inside `tests/api` folder. Please use `UpperCamelCase` for the parameter.
+
+After creating the component, you can access it from `<HOST>:<PORT>/<API_PREFIX>/<module-name>` - you can also check the test suite template by running `npm run test` / `yarn test`
 
 ## References
 

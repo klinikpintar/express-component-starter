@@ -18,7 +18,7 @@ class ComponentManager {
 
   registerComponent (name) {
     if (this.isValidComponent(name)) {
-      this.express.use('/api/' + name, require('components/' + name + '/' + name + '-api'))
+      this.express.use(`/${process.env.API_PREFIX}/` + name, require('components/' + name + '/' + name + '-api'))
     } else {
       console.error(path.join(this.path, name) + ' is not valid or may be disabled')
     }

@@ -6,8 +6,10 @@ class BodyParser {
   }
 
   register () {
-    this.express.use('/api/*', bp.json())
-    this.express.use('/api/*', bp.urlencoded({extended: false}))
+    this.express.use(`/${process.env.API_PREFIX}/*`, bp.json())
+    this.express.use(`/${process.env.API_PREFIX}/*`, bp.urlencoded({
+      extended: false
+    }))
   }
 }
 

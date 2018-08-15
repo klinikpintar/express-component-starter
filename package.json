@@ -29,5 +29,21 @@
     "mocha": "^5.2.0",
     "standard": "^11.0.1",
     "supertest": "^3.1.0"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "globals": [
+      "requireModule",
+      "ctx",
+      "cancel",
+      "dpd",
+      "body",
+      "setResult",
+      "error",
+      "$addCallback",
+      "$finishCallback"
+    ]
   }
 }
