@@ -1,23 +1,23 @@
-//wrapper for ORM / Persistence libraries. all persistence data related should go through here
+// wrapper for ORM / Persistence libraries. all persistence data related should go through here
 
 class ReservationRepository {
-    async find(criteria){
+  async find (criteria) {
 
-    }
-    async create(object) {
-        return object
-    }
-    async delete(criteria) {
+  }
+  async create (object) {
+    return object
+  }
+  async delete (criteria) {
 
-    }
+  }
 
-    //hmm
-    async save() {
+  // hmm
+  async save () {
 
-    }
-    async update() {
+  }
+  async update () {
 
-    }
+  }
 }
 
 module.exports = ReservationRepository
