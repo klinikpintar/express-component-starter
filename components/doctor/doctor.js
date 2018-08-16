@@ -1,6 +1,6 @@
 // TODO implement your model/schema
-class User {
+class Doctor {
 
 }
 
-module.exports = User
+module.exports = Doctor
