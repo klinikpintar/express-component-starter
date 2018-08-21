@@ -1,4 +1,5 @@
-var Config = require('app/config-manager')
+const Config = require('app/config-manager')
+const mongoose = require('mongoose')
 
 class Database {
   constructor () {
@@ -9,8 +10,12 @@ class Database {
   }
 
   createConnectionString () {
-    // todo implement connection string
-    let connection
+    let server = this.getServers()
+    let serverConfig = server.config
+    var connection = `mongodb://${this.config.username}:${this.config.password}`
+    connection += '@' + server.host.join(',')
+    connection += '/' + this.config.database
+    connection += '?' + Object.keys(serverConfig).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(serverConfig[k])}`).join('&')
     return connection
   }
 
@@ -27,11 +32,19 @@ class Database {
   }
 
   connect () {
-    console.warn('please implement database connection')
+    var db = mongoose.connection
+    db.on('error', console.error.bind(console, 'connection error:'))
+    db.once('open', () => {
+      console.log('success connect to mongodb')
+    })
+
+    return mongoose.connect(this.connectionString, this.getConnectionOptions())
   }
 
   getConnectionOptions () {
-    // todo add extra options if necessary
+    return {
+      useNewUrlParser: true
+    }
   }
 }
 

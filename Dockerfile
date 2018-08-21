@@ -12,6 +12,7 @@ COPY --from=nodeGit /app .
 RUN yarn global add pm2
 
 CMD ["pm2-runtime", "server.js"]
+
 EXPOSE 9091
 EXPOSE 80
 EXPOSE 43554

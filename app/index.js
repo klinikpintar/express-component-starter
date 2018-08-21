@@ -82,10 +82,10 @@ class Application {
     return express.Router()
   }
 
-  async run () {
-    await this.setUpDatabase()
+  run () {
+    this.setUpDatabase()
 
-    await this.setUpServer()
+    this.setUpServer()
 
     this.server.listen(this.config.port)
 

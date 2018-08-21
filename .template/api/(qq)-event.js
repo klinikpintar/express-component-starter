@@ -1,22 +1,14 @@
-// interactor between validator, controller & api
-const Repository = require('./(qq)-repository')
-const transformer = require('./(qq)-transformer')
+const app = require('app')
+const agenda = app.getExpress().agenda
 
-class (QQ)Event {
-  async create(req, res, next) {
-      try {
-          let repo = new Repository()
-          let data = await repo.create(req.query)
-          return res.json({
-              data: transformer.create(data)
-          })
-      } catch (error) {
-          console.log(error)
-          return res.status(500).json({
-              message: `Unknown Error Occured : ${error.message || error}`
-          })
-      }
-  }
-}
+console.log('setting default event for (qq)')
+agenda.on('ready', function () {
+    agenda.define(' (qq) event definition', (job, done) => {
+        // TODO implement tasks here
+        console.warn('please implement (qq) event or delete this event')
+    });
 
-module.exports = new (QQ)Event()
+    (async function () { // IIFE to give access to async/await
+        await agenda.every('2 minutes', ' (qq) event definition')
+    })()
+})

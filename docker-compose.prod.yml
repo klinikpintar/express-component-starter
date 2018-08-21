@@ -11,8 +11,6 @@ services:
         - mongodb
       environment:
         PWD: /middleware # no idea why pwd is not working
-      command:
-        pm2-runtime server.js --watch
     mongodb:
       image: mongo:3.6-jessie
       environment:
