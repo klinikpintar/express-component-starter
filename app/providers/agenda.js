@@ -17,7 +17,7 @@ class AgendaClient {
       }
     })
 
-    this.run()
+    this.run().catch(e => console.warn('agenda error!', e.message || e))
   }
 
   async run () {
