@@ -1,31 +1,31 @@
 module.exports = {
   server: {
     test: {
-      host: ['mongodb:27017'],
+      host: ['localhost:27017'],
       config: {
         authSource: 'admin'
       }
     },
     local: {
-      host: ['mongodb:27017'],
+      host: ['localhost:27017'],
       config: {
         authSource: 'admin'
       }
     },
     development: {
-      host: ['mongodb:27017'],
+      host: ['localhost:27017'],
       config: {
         authSource: 'admin'
       }
     },
     staging: {
-      host: ['mongodb:27017'],
+      host: ['localhost:27017'],
       config: {
         authSource: 'admin'
       }
     },
     production: {
-      host: ['mongodb:27017'],
+      host: ['localhost:27017'],
       config: {
         authSource: 'admin'
       }

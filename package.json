@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "agenda": "^2.0.0",
+    "amqplib": "^0.5.2",
     "app-module-path": "^2.2.0",
     "artillery": "^1.6.0-22",
     "body-parser": "^1.18.3",
