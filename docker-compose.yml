@@ -12,7 +12,7 @@ services:
       environment:
         PWD: /middleware # no idea why pwd is not working
       command:
-        pm2-runtime server.js --watch
+        pm2-runtime debug.config.js # debug mode for local compose
     mongodb:
       image: mongo:3.6-jessie
       environment:
