@@ -5,24 +5,21 @@ const MessageQueueService = require('./message-queue-service')
 class MessageQueueHelpers {
   constructor () {
     this.service = new MessageQueueService()
+    this.publisherChannel = undefined
   }
 
   async publishMessage (key, message) {
     let channel = await this.getPublisherChannel()
     await channel.assertQueue(key).catch(e => console.warn(e.message || e))
-    await channel.sendToQueue(key, Buffer.from(message)).catch(e => console.warn(e.message || e))
-    console.log(message, 'sent to queue')
+    channel.sendToQueue(key, Buffer.from(message))
   }
 
-  async consumeMessage (key) {
+  async consumeMessage (key, callback) {
     let channel = await this.getConsumerChannel().catch(e => console.warn(e.message || e))
     await channel.assertQueue(key).catch(e => console.warn(e.message || e))
-    let message = await channel.consume(key).catch(e => console.warn(e.message || e))
-    if (message !== null) {
-      console.log(message.content.toString())
-      channel.ack(message)
-    }
-    return message
+    channel.consume(key, callback, {
+      noAck: true
+    }).catch(e => console.warn(e.message || e))
   }
 
   async getPublisherChannel () {
@@ -33,19 +30,17 @@ class MessageQueueHelpers {
   }
 
   /** return promise */
-  async screatePublisherChannel () {
-    let channel
+  async createPublisherChannel () {
     if (this.service.publisherConnection.then !== undefined) { // still a promise
-      await this.service.publisherConnection
+      this.service.publisherConnection = await this.service.publisherConnection
     }
-    channel = this.service.createChannel(this.service.publisherConnection).catch(e => console.warn(e.message || e))
-    return channel
+    return this.service.createChannel(this.service.publisherConnection).catch(e => console.warn(e.message || e))
   }
 
   /** return promise */
   async getConsumerChannel () {
     if (this.service.consumerConnection.then !== undefined) { // still a promise
-      await this.service.consumerConnection
+      this.service.consumerConnection = await this.service.consumerConnection
     }
     return this.service.createChannel(this.service.consumerConnection).catch(e => console.warn(e.message || e))
   }

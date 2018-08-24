@@ -21,4 +21,8 @@ agenda.on('ready', function () {
 })
 
 console.log('consuming default event for doctor')
-console.log(messageQueue.consumeMessage(key))
+messageQueue.consumeMessage(key, messageCallback)
+
+function messageCallback (msg) {
+  console.log(' [x] Received %s', msg.content.toString())
+}

@@ -16,15 +16,15 @@ class MessageQueueService {
     return conn.createChannel()
   }
 
-  assertToQueue () {
+  assertToQueue (channel) {
 
   }
 
-  sendToQueue () {
+  sendToQueue (channel) {
 
   }
 
-  consumeQueue () {
+  consumeQueue (channel) {
 
   }
 }
