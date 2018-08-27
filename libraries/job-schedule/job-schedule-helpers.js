@@ -1,18 +1,23 @@
-const ScheduleService = require('./job-schedule-service')
+const JobScheduleService = require('./providers/agenda')
 
 /** helper class for best practice & wrapper implementations */
 
 class ScheduleHelpers {
   constructor () {
-    this.service = new ScheduleService()
+    this.service = new JobScheduleService()
+    this.service.init() // async proses
   }
 
-  addJob () {
-
+  scheduleRecurringJob (key, time, callback) {
+    this.service.scheduleRecurringJob(key, time, callback).catch(console.warn)
   }
 
-  removeJob () {
+  scheduleSingleJob (key, time, callback) {
+    this.service.scheduleSingleJob(key, time, callback).catch(console.warn)
+  }
 
+  removeJob (key) {
+    this.service.removeJob(key)
   }
 
   runSchedule () {
@@ -21,6 +26,10 @@ class ScheduleHelpers {
 
   runAllSchedule () {
 
+  }
+
+  stopSchedule () {
+    this.service.stop()
   }
 }
 

@@ -1,14 +1,18 @@
-const app = require('app')
-const agenda = app.getExpress().agenda
+const MessageQueueHelpers = require('libraries/message-queue')
+const JobScheduleHelpers = require('libraries/job-schedule')
 
-console.log('setting default event for (qq)')
-agenda.on('ready', function () {
-    agenda.define(' (qq) event definition', (job, done) => {
-        // TODO implement tasks here
-        console.warn('please implement (qq) event or delete this event')
-    });
+const key = '(qq)-event'
+const messageQueue = new MessageQueueHelpers()
+const jobSchedule = new JobScheduleHelpers()
 
-    (async function () { // IIFE to give access to async/await
-        await agenda.every('2 minutes', ' (qq) event definition')
-    })()
+messageQueue.publishMessage(key, 'default message queue event for (qq)')
+
+jobSchedule.scheduleRecurringJob('(qq) job-schedule definition', '1 minute', function () {
+    console.warn('please implement (qq) job-schedule here', new Date())
 })
+
+messageQueue.consumeMessage(key, messageCallback)
+
+function messageCallback(msg) {
+    console.log(' [x] Received %s', msg.content.toString())
+}

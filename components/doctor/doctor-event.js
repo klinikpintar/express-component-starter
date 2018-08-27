@@ -1,23 +1,16 @@
-const app = require('app')
-const agenda = app.getExpress().agenda
 const MessageQueueHelpers = require('libraries/message-queue')
+const JobScheduleHelpers = require('libraries/job-schedule')
 
 const key = 'doctor-event'
 const messageQueue = new MessageQueueHelpers()
+const jobSchedule = new JobScheduleHelpers()
 
 console.log('sending default event for doctor')
 messageQueue.publishMessage(key, 'sending default event for doctor')
 
 console.log('setting default job-schedule for doctor')
-agenda.on('ready', function () {
-  agenda.define(' doctor job-schedule definition', (job, done) => {
-    // TODO implement tasks here
-    console.warn('please implement doctor job-schedule or delete this job-schedule')
-  });
-
-  (async function () { // IIFE to give access to async/await
-    await agenda.every('2 minutes', ' doctor job-schedule definition')
-  })()
+jobSchedule.scheduleRecurringJob('doctor job-schedule definition', '1 minute', function () {
+  console.warn('please implement doctor job schedule here', new Date())
 })
 
 console.log('consuming default event for doctor')

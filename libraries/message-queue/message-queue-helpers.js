@@ -1,4 +1,4 @@
-const MessageQueueService = require('./message-queue-service')
+const MessageQueueService = require('./providers/rabbitmq')
 
 /** helper class for best practice & wrapper implementations */
 
@@ -10,16 +10,14 @@ class MessageQueueHelpers {
 
   async publishMessage (key, message) {
     let channel = await this.getPublisherChannel()
-    await channel.assertQueue(key).catch(e => console.warn(e.message || e))
-    channel.sendToQueue(key, Buffer.from(message))
+    await this.service.assertToQueue(channel, key)
+    this.service.sendToQueue(channel, key, Buffer.from(message))
   }
 
   async consumeMessage (key, callback) {
     let channel = await this.getConsumerChannel().catch(e => console.warn(e.message || e))
-    await channel.assertQueue(key).catch(e => console.warn(e.message || e))
-    channel.consume(key, callback, {
-      noAck: true
-    }).catch(e => console.warn(e.message || e))
+    await this.service.assertToQueue(channel, key)
+    this.service.consumeQueue(channel, key, callback)
   }
 
   async getPublisherChannel () {
