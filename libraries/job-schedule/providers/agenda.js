@@ -1,19 +1,18 @@
 const JobScheduleService = require('./service')
 const Agenda = require('agenda')
-const DatabaseManager = require('app/database-manager')
 
 class AgendaService extends JobScheduleService {
   constructor () {
     super()
-    let db = new DatabaseManager()
     this.collection = 'agenda_jobs'
-    this.connectionString = db.connectionString
+    this.connectionString = `${process.env.MONGO_CONNECTION_STRING}/${process.env.MONGO_DB_NAME}`
     this.agenda = undefined
   }
 
   async init () {
     this.agenda = new Agenda()
     this.agenda.database(this.connectionString, this.collection, {
+      authSource: 'admin',
       useNewUrlParser: true
     })
     await this.start()

@@ -3,8 +3,13 @@
  * Work In Progress
  * TODO : complete the files, remove this comment
  */
+const express = require('app').getExpress()
 
 class DoctorRepository {
+  constructor () {
+    this.db = express.db
+  }
+
   async find (criteria) {
 
   }

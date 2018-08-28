@@ -3,30 +3,30 @@ const http = require('http')
 const https = require('https')
 const express = require('express')
 const ConfigManager = require('app/config-manager')
-const DatabaseManager = require('app/database-manager')
 const ComponentManager = require('app/component-manager')
 
 class Application {
   constructor () {
     let config = new ConfigManager()
     this.express = express()
-    this.config = config.get('server')
+    this.serverConfig = config.get('server')
+    this.dbConfig = config.get('database')
     this.serviceProviders = config.get('service-provider')
   }
 
   setUpServer () {
-    this.createServer(this.config.protocol === 'https')
+    this.createServer(this.serverConfig.protocol === 'https')
   }
 
-  setUpDatabase () {
-    let db = new DatabaseManager()
-    db.connect()
+  async setUpDatabase () {
+    let db = this.dbConfig
+    this.express.db = await db.connect().catch(console.warn)
   }
 
   registerServiceProviders () {
     this.serviceProviders.forEach(ServiceProvider => {
       try {
-        let instance = new ServiceProvider(this.express, this.server, this.config)
+        let instance = new ServiceProvider(this.express, this.server, this.serverConfig)
 
         if (typeof instance.register === 'function') {
           instance.register()
@@ -40,7 +40,7 @@ class Application {
   installServiceProviders () {
     this.serviceProviders.forEach(ServiceProvider => {
       try {
-        let instance = new ServiceProvider(this.express, this.server, this.config)
+        let instance = new ServiceProvider(this.express, this.server, this.serverConfig)
 
         if (typeof instance.install === 'function') {
           instance.install()
@@ -53,7 +53,7 @@ class Application {
 
   createServer (secure) {
     if (secure === true) {
-      this.server = https.createServer(this.config.certificates, this.express)
+      this.server = https.createServer(this.serverConfig.certificates, this.express)
     } else {
       this.server = http.createServer(this.express)
     }
@@ -87,9 +87,9 @@ class Application {
 
     this.setUpServer()
 
-    this.server.listen(this.config.port)
+    this.server.listen(this.serverConfig.port)
 
-    console.log('server listening on port :' + this.config.port)
+    console.log('server listening on port :' + this.serverConfig.port)
   }
 }
 
