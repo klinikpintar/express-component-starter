@@ -5,7 +5,7 @@ module.exports = {
    */
   apps: [
     {
-      name: 'Pertamedika Middleware',
+      name: 'Express Component Starter',
       script: 'server.js',
       watch: true,
       ignore_watch: ['.git', 'node_modules', 'data', '*.log', './build', './dist', 'assets', 'uploads', 'public'],

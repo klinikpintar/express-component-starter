@@ -1,13 +1,13 @@
 FROM node:8.11-alpine as nodeGit
-WORKDIR /middleware
-COPY . /middleware
+WORKDIR /backend
+COPY . /backend
 
 RUN apk add --no-cache git && \
     yarn install
 
 FROM node:8.11-alpine
-WORKDIR /middleware
-COPY --from=nodeGit /middleware .
+WORKDIR /backend
+COPY --from=nodeGit /backend .
 
 RUN yarn global add pm2
 
