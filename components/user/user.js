@@ -4,8 +4,8 @@
  * TODO : complete the files, remove this comment
  */
 
-class Doctor {
+class User {
 
 }
 
-module.exports = Doctor
+module.exports = User

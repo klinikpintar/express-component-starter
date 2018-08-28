@@ -5,12 +5,12 @@
  */
 
 const router = require('app').getRouter()
-const Controller = require('./doctor-controller')
-const Validator = require('./doctor-validator')
+const Controller = require('./user-controller')
+const Validator = require('./user-validator')
 
 /* GET response */
 router.get('/', function (req, res, next) {
-  res.send(' doctor component')
+  res.send(' user component')
 })
 /* POST response */
 router.post('/', Validator.request.create, Controller.create, Validator.response.create)

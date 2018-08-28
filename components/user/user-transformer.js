@@ -4,7 +4,7 @@
  * TODO : complete the files, remove this comment
  */
 
-class DoctorTransformer {
+class UserTransformer {
   create (data) {
     var output = []
     data.forEach(dt => {
@@ -14,4 +14,4 @@ class DoctorTransformer {
   }
 }
 
-module.exports = new DoctorTransformer()
+module.exports = new UserTransformer()

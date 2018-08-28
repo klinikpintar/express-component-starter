@@ -4,10 +4,10 @@
  * TODO : complete the files, remove this comment
  */
 
-const Repository = require('./reservation-repository')
-const transformer = require('./reservation-transformer')
+const Repository = require('./user-repository')
+const transformer = require('./user-transformer')
 
-class ReservationController {
+class UserController {
   async create (req, res, next) {
     try {
       let repo = new Repository()
@@ -24,4 +24,4 @@ class ReservationController {
   }
 }
 
-module.exports = new ReservationController()
+module.exports = new UserController()
