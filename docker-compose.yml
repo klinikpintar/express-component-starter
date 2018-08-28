@@ -22,3 +22,5 @@ services:
       volumes: 
         - ./data/db:/data/db
       restart: unless-stopped
+      ports:
+        - 27017:27017 # expose to localhost on development

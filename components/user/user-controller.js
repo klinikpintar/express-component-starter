@@ -1,4 +1,9 @@
-// interactor between validator, controller & api
+/**
+ * Template file for Controller layer
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
+
 const Repository = require('./user-repository')
 const transformer = require('./user-transformer')
 

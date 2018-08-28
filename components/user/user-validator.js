@@ -1,5 +1,8 @@
-// validate response & request
-// also store success / error messages
+/**
+ * Template file for Validate functions
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
 
 module.exports = {
   request: {

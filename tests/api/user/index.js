@@ -1,3 +1,9 @@
+/**
+ * Template file for API testing
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
+
 const chalk = require('chalk')
 
 describe(chalk.cyanBright.bold('test suite template for user'), function () {
