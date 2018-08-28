@@ -42,6 +42,7 @@ Please run `standard --fix` before committing. Or use IDE plugin to auto format 
     - **Model** : represented by `module-name.js` - feel free to add more model if necessary
     - **Repository** : represented by `module-name-repository.js` - it contains data processing functions for your model & database
     - **Controller** : represented by `module-name-controller.js` - it contains business logic for your components / application
+    - **Event** : represented by `module-name-event.js` - it contains a repeatable job / event based action for your application. We're using `agendajs` for this repository.
     - **Transformer** : represented by `module-name-transformer.js` - it transform data from API and making sure the schema is always valid & consistent
     - **Validator** : represented by `module-name-validator.js` - it validates requests & responses and making sure all data input & output will conform to client's requirement
     - **Router** : represented by `module-name-api.js` - it contains your route list and logics.

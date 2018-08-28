@@ -1,34 +1,26 @@
+// TODO implement your db configuration
+
 module.exports = {
   server: {
     test: {
-      host: ['mongodb:27017'],
-      config: {
-        authSource: 'admin'
-      }
+      host: [],
+      config: {}
     },
     local: {
-      host: ['mongodb:27017'],
-      config: {
-        authSource: 'admin'
-      }
+      host: [],
+      config: {}
     },
     development: {
-      host: ['mongodb:27017'],
-      config: {
-        authSource: 'admin'
-      }
+      host: [],
+      config: {}
     },
     staging: {
-      host: ['mongodb:27017'],
-      config: {
-        authSource: 'admin'
-      }
+      host: [],
+      config: {}
     },
     production: {
-      host: ['mongodb:27017'],
-      config: {
-        authSource: 'admin'
-      }
+      host: [],
+      config: {}
     }
   },
   username: process.env.DB_USER,

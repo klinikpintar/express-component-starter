@@ -84,7 +84,6 @@ class Application {
 
   run () {
     this.setUpDatabase()
-
     this.setUpServer()
 
     this.server.listen(this.config.port)
