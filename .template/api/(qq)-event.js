@@ -1,3 +1,10 @@
+/**
+ * Template file for Event layer
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
+
+
 const MessageQueueHelpers = require('libraries/message-queue')
 const JobScheduleHelpers = require('libraries/job-schedule')
 

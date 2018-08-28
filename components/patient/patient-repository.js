@@ -1,4 +1,8 @@
-// wrapper for ORM / Persistence libraries. all persistence data related should go through here
+/**
+ * Template file for Repository layer
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
 
 class PatientRepository {
   async find (criteria) {

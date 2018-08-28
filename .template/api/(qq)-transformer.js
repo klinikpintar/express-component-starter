@@ -1,4 +1,9 @@
-//transform response
+/**
+ * Template file for Transformer functions
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
+
 
 class (QQ)Transformer {
 

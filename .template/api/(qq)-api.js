@@ -1,3 +1,9 @@
+/**
+ * Template file for API layer
+ * Work In Progress
+ * TODO : complete the files, remove this comment
+ */
+
 const router = require('app').getRouter()
 const Controller = require('./(qq)-controller')
 const Validator = require('./(qq)-validator')

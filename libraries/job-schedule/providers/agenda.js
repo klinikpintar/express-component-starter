@@ -25,7 +25,6 @@ class AgendaService extends JobScheduleService {
 
   async scheduleRecurringJob (key, time, callback) {
     this.agenda.on('ready', async () => {
-      console.log(key, time, callback)
       this.agenda.define(key, callback)
       await this.agenda.every(time, key)
     })
