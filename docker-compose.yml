@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+    express-starter:
+      build: .
+      ports:
+        - 80:${PORT}
+      volumes:
+        - .:/backend
+      depends_on:
+        - mongodb
+        - postgres
+      environment:
+        PWD: /backend # no idea why pwd is not working
+      command:
+        pm2-runtime debug.config.js # debug mode for local compose
+    mongodb:
+      image: mongo:3.6-jessie
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: ${INITDB_ROOT_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${INITDB_ROOT_PASSWORD}
+        MONGO_INITDB_DATABASE: ${INITDB_DATABASE}
+      volumes: 
+        - ./data/mongo/db:/data/db
+      restart: unless-stopped
+      ports:
+        - 27017:27017 # expose to localhost on development
+    postgres:
+      image: postgres:9.5-alpine
+      environment:
+        POSTGRES_USER: ${INITDB_ROOT_USERNAME}
+        POSTGRES_PASSWORD: ${INITDB_ROOT_PASSWORD}
+        POSTGRES_DB: ${INITDB_DATABASE}
+      volumes: 
+        - ./data/postgres/db:/var/lib/postgresql/data
+      restart: unless-stopped
+      ports:
+        - 5432:5432 # expose to localhost on development
+
+    adminer:
+      image: adminer
+      ports:
+        - 8081:8080
