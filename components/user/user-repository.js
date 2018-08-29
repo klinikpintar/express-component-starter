@@ -4,24 +4,25 @@
  * TODO : complete the files, remove this comment
  */
 
+
 class UserRepository {
-  async find (criteria) {
+    async find(criteria){
 
-  }
-  async create (object) {
-    return object
-  }
-  async delete (criteria) {
+    }
+    async create(object) {
+        return object
+    }
+    async delete(criteria) {
 
-  }
+    }
 
-  // hmm
-  async save () {
+    //hmm
+    async save() {
 
-  }
-  async update () {
+    }
+    async update() {
 
-  }
+    }
 }
 
 module.exports = UserRepository
