@@ -55,6 +55,14 @@ To make things easier, we've made a simple bash script to generate components fo
 
 After creating the component, you can access it from `<HOST>:<PORT>/<API_PREFIX>/<module-name>` - you can also check the test suite template by running `npm run test` / `yarn test`
 
+## Database Options
+
+You can choose between NoSQL ( using `mongodb` database driver ) or SQL ( using `sequelize` database driver ). In this repository, you're given example configuration on using mongo / postgres. Please see `app/providers/database` for details
+
+## Docker & Docker Compose
+
+Running `docker-compose up` will give you several connected containers ready for tinkering : Application container using node 8.11, MongoDB 3.6 with persistence volume, and Postgres 9.5 with persistence volume. ( will create `data/mongo` and `data/postgres` folder if not exists )
+
 ## References
 
 Follow lots of guides from https://github.com/i0natan/nodebestpractices
