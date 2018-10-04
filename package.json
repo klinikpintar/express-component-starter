@@ -45,6 +45,7 @@
       "cancel",
       "dpd",
       "body",
+      "parts",
       "setResult",
       "error",
       "$addCallback",
