@@ -63,8 +63,15 @@ You can choose between NoSQL ( using `mongodb` database driver ) or SQL ( using 
 
 Running `docker-compose up` will give you several connected containers ready for tinkering : Application container using node 8.11, MongoDB 3.6 with persistence volume, and Postgres 9.5 with persistence volume. ( will create `data/mongo` and `data/postgres` folder if not exists )
 
-## References
+## Notes & References
 
-Follow lots of guides from https://github.com/i0natan/nodebestpractices
+The main principle of this component based architecture is loose-coupled relation between components. But depending on your business domain, there might be some components that are tighly coupled and that's also quite alright.
+
+For the loosely coupled component, you need to interact by sending messages/by REST API, just like how mocroservices interact. A component can call API / use message broker to call another components related functions.
+
+For the tightly coupled components you just call the method directly, will be better if they're inside some kind of parent component so the context is clearer.
+
+---
+Follow lots of guides from https://github.com/i0natan/nodebestpractices , http://www.appcontinuum.io/
 
 Watch repository pattern here https://www.youtube.com/watch?v=rtXpYpZdOzM&feature=youtu.be
