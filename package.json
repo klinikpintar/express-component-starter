@@ -22,7 +22,7 @@
     "http-errors": "~1.6.2",
     "lodash": "^4.17.13",
     "mongodb": "3.0.10",
-    "morgan": "~1.9.0",
+    "morgan": "~1.9.1",
     "newrelic": "^4.8.0",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
