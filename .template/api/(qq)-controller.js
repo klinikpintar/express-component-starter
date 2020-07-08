@@ -7,11 +7,11 @@
 const Repository = require('./(qq)-repository')
 const transformer = require('./(qq)-transformer')
 
-class (QQ)Controller {
+module.exports = {
   async create(req, res, next) {
       try {
           let repo = new Repository()
-          let data = await repo.create(req.query)
+          let data = await repo.create(req.body)
           return res.json({
               data: transformer.create(data)
           })
@@ -23,5 +23,3 @@ class (QQ)Controller {
       }
   }
 }
-
-module.exports = new (QQ)Controller()

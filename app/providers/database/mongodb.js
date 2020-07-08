@@ -5,7 +5,8 @@ const connectionString = process.env.MONGO_CONNECTION_STRING
 module.exports = {
   async connect () {
     let client = await MongoClient.connect(`${connectionString}/${dbName}`, {
-      authSource: 'admin'
+      authSource: 'admin',
+      useUnifiedTopology: true
     }).catch(console.warn)
 
     if (client) {

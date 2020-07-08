@@ -5,14 +5,12 @@
  */
 
 const router = require('app').getRouter()
-const Controller = require('./user-controller')
-const Validator = require('./user-validator')
+const userController = require('./user-controller')
+const validator = require('./user-validator')
 
 /* GET response */
-router.get('/', function (req, res, next) {
-  res.send(' user component')
-})
+router.get('/', userController.findAll)
 /* POST response */
-router.post('/', Validator.request.create, Controller.create, Validator.response.create)
+router.post('/', validator.request.create, userController.create, validator.response.create)
 
 module.exports = router

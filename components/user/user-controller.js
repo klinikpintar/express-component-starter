@@ -5,23 +5,28 @@
  */
 
 const Repository = require('./user-repository')
-const transformer = require('./user-transformer')
+const transformer =  require('./user-transformer')
 
-class UserController {
-  async create(req, res, next) {
-      try {
-          let repo = new Repository()
-          let data = await repo.create(req.query)
-          return res.json({
-              data: transformer.create(data)
-          })
-      } catch (error) {
-          console.log(error)
-          return res.status(500).json({
-              message: `Unknown Error Occured : ${error.message || error}`
-          })
-      }
-  }
+module.exports = {
+    
+    async findAll(req, res, next) {
+        const repo = new Repository()
+        let data = await repo.findAll()
+        return res.json(data)
+    },
+
+    async create(req, res, next) {
+        const repo = new Repository()
+        try {
+            let data = await repo.create(req.body)
+            return res.json({
+                data: transformer.create(data)
+            })
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({
+                message: `Unknown Error Occured : ${error.message || error}`
+            })
+        }
+    }
 }
-
-module.exports = new UserController()

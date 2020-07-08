@@ -6,7 +6,7 @@ class Rewrite {
   }
 
   register () {
-    this.express.use(rewrite(/^\/api\/(.*)/, '/$1'))
+    this.express.use(rewrite(/^\/process.env.API_PREFIX\/(.*)/, '/$1'))
   }
 }
 

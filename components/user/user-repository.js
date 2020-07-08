@@ -3,25 +3,26 @@
  * Work In Progress
  * TODO : complete the files, remove this comment
  */
-
+const app = require('app')
 
 class UserRepository {
-    async find(criteria){
+    constructor() {
+        this.db = app.getDatabase()
+        this.collection = this.db.collection('users')
+    }
 
+    async findAll() {
+        const res = await this.collection.find({}).toArray()
+        return res
     }
-    async create(object) {
-        return object
+
+    async create(user) {
+        console.log(user)
+        const res = await this.collection.insertMany([user])
+        return res
     }
+
     async delete(criteria) {
-
-    }
-
-    //hmm
-    async save() {
-
-    }
-    async update() {
-
     }
 }
 

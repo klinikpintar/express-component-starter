@@ -5,7 +5,7 @@
  */
 
 
-class (QQ)Transformer {
+module.exports = {
 
     create(data) {
         var output = []
@@ -16,5 +16,3 @@ class (QQ)Transformer {
     }
 
 }
-
-module.exports = new (QQ)Transformer()

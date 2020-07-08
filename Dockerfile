@@ -1,11 +1,11 @@
-FROM node:8.11-alpine as nodeGit
+FROM node:10-alpine as nodeGit
 WORKDIR /backend
 COPY . /backend
 
 RUN apk add --no-cache git && \
     yarn install
 
-FROM node:8.11-alpine
+FROM node:10-alpine
 WORKDIR /backend
 COPY --from=nodeGit /backend .
 

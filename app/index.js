@@ -4,9 +4,10 @@ const https = require('https')
 const express = require('express')
 const ConfigManager = require('app/config-manager')
 const ComponentManager = require('app/component-manager')
+const { config } = require('dotenv')
 
 class Application {
-  constructor () {
+  constructor() {
     let config = new ConfigManager()
     this.express = express()
     this.serverConfig = config.get('server')
@@ -14,16 +15,16 @@ class Application {
     this.serviceProviders = config.get('service-provider')
   }
 
-  setUpServer () {
+  setUpServer() {
     this.createServer(this.serverConfig.protocol === 'https')
   }
 
-  async setUpDatabase () {
+  async setUpDatabase() {
     let db = this.dbConfig
     this.express.db = await db.connect().catch(console.warn)
   }
 
-  registerServiceProviders () {
+  registerServiceProviders() {
     this.serviceProviders.forEach(ServiceProvider => {
       try {
         let instance = new ServiceProvider(this.express, this.server, this.serverConfig)
@@ -37,7 +38,7 @@ class Application {
     })
   }
 
-  installServiceProviders () {
+  installServiceProviders() {
     this.serviceProviders.forEach(ServiceProvider => {
       try {
         let instance = new ServiceProvider(this.express, this.server, this.serverConfig)
@@ -51,7 +52,7 @@ class Application {
     })
   }
 
-  createServer (secure) {
+  createServer(secure) {
     if (secure === true) {
       this.server = https.createServer(this.serverConfig.certificates, this.express)
     } else {
@@ -70,19 +71,23 @@ class Application {
     return this.server
   }
 
-  getExpress () {
+  getExpress() {
     return this.express
   }
 
-  getServer () {
+  getServer() {
     return this.server
   }
 
-  getRouter () {
+  getRouter() {
     return express.Router()
   }
 
-  run () {
+  getDatabase() {
+    return this.express.db
+  }
+
+  run() {
     this.setUpDatabase()
     this.setUpServer()
 

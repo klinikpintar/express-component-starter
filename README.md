@@ -53,7 +53,7 @@ Please run `standard --fix` before committing. Or use IDE plugin to auto format 
 
 To make things easier, we've made a simple bash script to generate components for you. Call it like this `sh component-generator ComponentName` - and it will generate a folder with files inside `components` folder - it will also generate a folder with test suite template inside `tests/api` folder. Please use `UpperCamelCase` for the parameter.
 
-After creating the component, you can access it from `<HOST>:<PORT>/<API_PREFIX>/<module-name>` - you can also check the test suite template by running `npm run test` / `yarn test`
+After creating the component, you can access it from `<HOST>:<PORT>/<API_PREFIX>/<module-name>` - you can also check the test suite template by running `npm run test` / `yarn test`. Currently available component is `user` component using `mongodb` as sample.
 
 ## Database Options
 
