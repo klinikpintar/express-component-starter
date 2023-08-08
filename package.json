@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "standard --fix && pm2 start debug.config.js --no-daemon",
     "test": "node ./tests/api/test.js",
-    "load-test": "node ./tests/artillery/test.js"
+    "load-test": "node ./tests/artillery/test.js",
+    "generate-component": "node component-generator.js"
   },
   "dependencies": {
     "agenda": "^2.0.0",
