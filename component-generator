@@ -1,33 +1,32 @@
 #!/bin/bash
+const fsExtra = require('fs-extra');
+const path = require('path');
 
-uppercase=$1
-kebabcase="$(echo ${uppercase} | sed -e 's/\([A-Z]\)/\-\1/g' -e 's/\-//' | tr '[:upper:]' '[:lower:]')"
+const uppercase = process.argv[2];
+const kebabcase = uppercase.replace(/([A-Z])/g, '-$1').toLowerCase();
 
+console.log('creating folder');
+fsExtra.copySync(path.join('.template', 'api'), path.join('components', kebabcase));
+fsExtra.copySync(path.join('.template', 'test'), path.join('tests', 'api', kebabcase));
 
-echo "creating folder"
-cp -R .template/api components/$kebabcase
-cp -R .template/test tests/api/$kebabcase
+console.log('modifying files for api');
+const componentDir = path.join('components', kebabcase);
+fs.readdirSync(componentDir).forEach(file => {
+    if (file.includes('(qq)')) {
+        let content = fs.readFileSync(path.join(componentDir, file), 'utf8');
+        content = content.replace(/\(QQ\)/g, uppercase);
+        content = content.replace(/\(qq\)/g, kebabcase);
+        fs.writeFileSync(path.join(componentDir, file.replace('(qq)', kebabcase)), content);
+    }
+});
 
-echo "modifying files for api"
-cd ./components/$kebabcase
+console.log('modifying files for test');
+const testFile = path.join('tests', 'api', kebabcase, 'index.js');
+let content = fs.readFileSync(testFile, 'utf8');
+content = content.replace(/\(qq\)/g, kebabcase);
+fs.writeFileSync(testFile, content);
 
-for file in $(find . -maxdepth 1 -name "*(qq)*" -type f)
-do
-    #change variable inside file
-    sed -i 's/(QQ)/'$uppercase'/g' "$file"
-    sed -i 's/(qq)/'$kebabcase'/g' "$file"
-
-    echo '    change' "$file" 'to' `echo "${file//(qq)/$kebabcase}"`
-    mv "$file" `echo "${file//(qq)/$kebabcase}"`
-done
-
-# for D in $(find . -depth -name "*(qq)*" -type d) '.' 
-# do 
-#     pushd $D >> /dev/null
-#     echo 'directory: ' "$D"
-#     for file in $(find . -maxdepth 1 -name "*(qq)*" -type f)
-#     do
-#         #change variable inside file
+console.log('process complete');
 #         sed -i 's/(QQ)/'$uppercase'/g' "$file"
 #         sed -i 's/(qq)/'$kebabcase'/g' "$file"
 
