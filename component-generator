@@ -1,13 +1,13 @@
 #!/bin/bash
-const fs = require('fs');
+const fsExtra = require('fs-extra');
 const path = require('path');
 
 const uppercase = process.argv[2];
 const kebabcase = uppercase.replace(/([A-Z])/g, '-$1').toLowerCase();
 
 console.log('creating folder');
-fs.copyFileSync(path.join('.template', 'api'), path.join('components', kebabcase));
-fs.copyFileSync(path.join('.template', 'test'), path.join('tests', 'api', kebabcase));
+fsExtra.copySync(path.join('.template', 'api'), path.join('components', kebabcase));
+fsExtra.copySync(path.join('.template', 'test'), path.join('tests', 'api', kebabcase));
 
 console.log('modifying files for api');
 const componentDir = path.join('components', kebabcase);
